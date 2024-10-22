@@ -1,37 +1,6 @@
-from os import CLD_EXITED
 import pygame
 import time
-
 from pygame.constants import K_LEFT, K_UP
-#pygame.draw.line(screen, Color_line, (60, 80), (130, 100))
-"""
-STRUCTURE:
-    grid contient un dictionnaire de la forme {[x,y]:[nb_voisins,alive]} (nb_voisins = int, alive = bool)
-    au début de chaque itération on commence par recalculer le nb de voisins de chaque cell intéressante :
-        on reset le nb de voisins de chaque clé [x,y] a 0
-        puis on parcours le dictionnaire :
-            pour chaque clé [x,y]:
-                si [x-1,y] n'est pas dans le dictionaire:
-                    on fait dic[x-1,y] = 1
-                sinon:
-                    dic[x-1,y] += 1
-                on fait la même chose pour : [x+1,y], [x,y-1],[x,y+1],[x-1,y-1],[x-1,y+1],[x+1,y-1],[x+1,y+1]
-
-    on va maintenant déterminer quelles cellules seront en vie :
-        on parcours le dictionnaire:
-            si la cellule [x,y] est en vie:
-                si dic[x,y][0] < 2 OU dic[x,y][1] > 3:
-                    dic[x,y][1] = False
-                sinon:
-                    dic[x,y][0] = True
-            sinon:
-                si dic[x,y][0] == 3:
-                    dic[x,y][1] = True
-                sinon:
-                    dic[x,y][1] = False
-
-    on parcours maintenant le dictionnaire et on affiche uniquement les cellules en vie
-"""
 
 class grid(object):
     def __init__(self,l_cells):
@@ -78,10 +47,6 @@ class grid(object):
         #on ajoute les nouvelles cells au dic
         for cell in new_cells.keys():
             self.dic[cell] = new_cells[cell]
-            #print()
-
-        #for cell in self.dic.keys():
-        #    print("cellule:",cell,"     nb_voisins:",self.dic[cell][0],"   alive?:",self.dic[cell][1])
 
     def calc_alive(self):
         #on détermine quelles cellules seront en vie a la prochaine itération
@@ -148,10 +113,6 @@ def on_button(pos,button_top_left,button_size):
         if pos[1] >= button_top_left[1] and pos[1] <= button_top_left[1] + button_size[1]:
             return True
     return False
-#TESTS
-#p = grid({(1,2):[0,True],(2,2):[0,True],(3,2):[0,True]})
-#p.dic_access_test()
-#.p.reset_voisins()
 
 initial_state = {(42,22):[0,True],(42,23):[0,True],(42,24):[0,True],(41,23):[0,True],(43,23):[0,True]}
 init_copy = {}
@@ -284,10 +245,6 @@ while running:
 
     screen.fill(back_color)
     dic = p.get_grid()
-    #print("itération",iter,":")
-    #p.dic_access_test()
-    #time.sleep(1)
-    #game logic here
     draw_alive_cell(dic,CELL_SIZE)
     if grille:
         draw_lines(WITDH,HEIGHT,CELL_SIZE)
