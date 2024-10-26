@@ -10,3 +10,6 @@ Things to implement/improve :
 - a way to save cells
 - a way to load cells
 - improve the overall UI
+
+
+![LIFE](life.gif)
