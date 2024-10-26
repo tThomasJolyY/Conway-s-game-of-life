@@ -12,4 +12,4 @@ Things to implement/improve :
 - improve the overall UI
 
 
-![LIFE](life.gif)
+![LIFE](lifev2.gif)
